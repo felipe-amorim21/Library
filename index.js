@@ -3,11 +3,17 @@ const bookGrid = document.getElementById('bookGrid')
 const btn  = document.getElementById('btn')
 const formbtn = document.getElementById('formbtn')
 const bookform = document.querySelector('form') 
+const closebtn = document.getElementsByClassName('close')
 
 btn.addEventListener('click', function(){
     
     bookform.style.display = 'flex'
     bookGrid.style.display = 'none'
+})
+
+closebtn.addEventListener('click', function(){
+    bookform.style.display = 'none'
+    bookGrid.style.display = 'grid'
 })
 
 formbtn.addEventListener('click', function(e){
