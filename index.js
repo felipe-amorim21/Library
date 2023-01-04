@@ -24,6 +24,9 @@ formbtn.addEventListener('click', function(e){
     bookform.style.display = 'none'
     bookGrid.style.display = 'grid'
     showBooks()
+    bookname.value = ''
+    bookauthor.value = ''
+    bookpages.value = ''
 })
 
 let myLibrary = []
