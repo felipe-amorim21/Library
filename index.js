@@ -1,7 +1,12 @@
 
 const bookGrid = document.getElementById('bookGrid')
+const btn  = document.getElementById('btn')
 
-
+btn.addEventListener('click', function(){
+    const bookform = document.querySelector('form')
+    bookform.style.display = 'flex'
+    bookGrid.style.display = 'none'
+})
 
 let myLibrary = []
 
