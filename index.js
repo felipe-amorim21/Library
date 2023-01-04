@@ -24,3 +24,14 @@ function addBookToLibrary(book) {
     }
 }
 
+function showBooks(){
+    for(let i = 0; i <= myLibrary.length-1; i++){
+        console.log((myLibrary[i]).info())
+    }
+}
+
+let book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
+
+addBookToLibrary(book1)
+
+showBooks()
