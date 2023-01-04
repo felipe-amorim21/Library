@@ -1,11 +1,29 @@
 
 const bookGrid = document.getElementById('bookGrid')
 const btn  = document.getElementById('btn')
+const formbtn = document.getElementById('formbtn')
+const bookform = document.querySelector('form') 
 
 btn.addEventListener('click', function(){
-    const bookform = document.querySelector('form')
+    
     bookform.style.display = 'flex'
     bookGrid.style.display = 'none'
+})
+
+formbtn.addEventListener('click', function(e){
+    e.preventDefault()
+    let bookname = document.getElementById('bookname')
+    let bookauthor = document.getElementById('bookauthor')
+    let bookpages = document.getElementById('bookpages')
+    let bookread = document.getElementById('bookread')
+    if (bookname.value === '' | bookauthor.author === '' | bookpages.value === '') {
+        return false
+    }
+    let book = new Book(bookname.value,bookauthor.value, bookpages.value, bookread.checked )
+    addBookToLibrary(book)
+    bookform.style.display = 'none'
+    bookGrid.style.display = 'grid'
+    showBooks()
 })
 
 let myLibrary = []
@@ -32,33 +50,22 @@ function Book(title, author, pages, is_read){
 
 function addBookToLibrary(book) {
     if (book instanceof (Book)) {
-        
         myLibrary.push(book)
     }
 }
 
 function showBooks(){
+    clearDisplay()
     for(let i = 0; i <= myLibrary.length-1; i++){
         console.log((myLibrary[i]).info())
-        const book = document.createElement('div')
+        let book = document.createElement('div')
         book.classList.add('card')
         book.textContent = (myLibrary[i]).info()
         bookGrid.appendChild(book)
     }
 }
 
-let book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
-let book2 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
-let book3 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
-let book4 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
-let book5 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
-let book6 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
 
-addBookToLibrary(book1)
-addBookToLibrary(book2)
-addBookToLibrary(book3)
-addBookToLibrary(book4)
-addBookToLibrary(book5)
-addBookToLibrary(book6)
-
-showBooks()
+function clearDisplay() {
+    bookGrid.textContent = ''
+}
