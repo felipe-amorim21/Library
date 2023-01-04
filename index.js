@@ -1,3 +1,9 @@
+const body = document.querySelector('body')
+const bookGrid = document.createElement('div')
+
+body.appendChild(bookGrid)
+
+
 let myLibrary = []
 
 function Book(title, author, pages, is_read){
@@ -17,7 +23,6 @@ function Book(title, author, pages, is_read){
 	}
 }
 
-
 function addBookToLibrary(book) {
     if (book instanceof (Book)) {
         myLibrary.push(book)
@@ -27,6 +32,7 @@ function addBookToLibrary(book) {
 function showBooks(){
     for(let i = 0; i <= myLibrary.length-1; i++){
         console.log((myLibrary[i]).info())
+        bookGrid.textContent += (myLibrary[i]).info()
     }
 }
 
