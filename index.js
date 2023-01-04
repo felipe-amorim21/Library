@@ -17,3 +17,10 @@ function Book(title, author, pages, is_read){
 	}
 }
 
+
+function addBookToLibrary(book) {
+    if (book instanceof (Book)) {
+        myLibrary.push(book)
+    }
+}
+
