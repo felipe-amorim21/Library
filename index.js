@@ -1,19 +1,20 @@
-
-const bookGrid = document.getElementById('bookGrid')
-const btn  = document.getElementById('btn')
+const books = document.getElementById('books')
 const formbtn = document.getElementById('formbtn')
-const bookform = document.querySelector('form') 
-const closebtn = document.getElementsByClassName('close')
+const bookform = document.querySelector('form')
+const btn = document.getElementById('btn')
+const closebtn = document.getElementById('close')
+
+
+
 
 btn.addEventListener('click', function(){
-    
     bookform.style.display = 'flex'
-    bookGrid.style.display = 'none'
+    books.style.display = 'none'
 })
 
 closebtn.addEventListener('click', function(){
     bookform.style.display = 'none'
-    bookGrid.style.display = 'grid'
+    books.style.display = 'grid'
 })
 
 formbtn.addEventListener('click', function(e){
@@ -22,27 +23,30 @@ formbtn.addEventListener('click', function(e){
     let bookauthor = document.getElementById('bookauthor')
     let bookpages = document.getElementById('bookpages')
     let bookread = document.getElementById('bookread')
-    if (bookname.value === '' | bookauthor.author === '' | bookpages.value === '') {
+    if (bookname.value === '' | bookauthor.value === '' | bookpages.value === '') {
         return false
     }
-    let book = new Book(bookname.value,bookauthor.value, bookpages.value, bookread.checked )
+    let book = new Book(bookname.value,bookauthor.value, bookpages.value, bookread.checked, myLibrary.length )
     addBookToLibrary(book)
     bookform.style.display = 'none'
-    bookGrid.style.display = 'grid'
+    books.style.display = 'grid'
     showBooks()
     bookname.value = ''
     bookauthor.value = ''
     bookpages.value = ''
 })
 
+
+
+
 let myLibrary = []
 
-function Book(title, author, pages, is_read){
+function Book(title, author, pages, is_read, data){
 	this.title = title
 	this.author = author
 	this.pages = pages
 	this.is_read = is_read
-
+    this.data = data
 
 
 	this.info = function() {
@@ -63,18 +67,36 @@ function addBookToLibrary(book) {
     }
 }
 
+
+function createCard(bookContent) {
+    let bookCard = document.createElement('div')
+    console.log(`dhsjadhjshdsjd ${this}`)
+    let btn2 = document.createElement('button')
+    btn2.addEventListener('click', function() {
+        if (bookContent.data > -1) { // only splice array when item is found
+            myLibrary.splice(bookContent.data, 1); // 2nd parameter means remove one item only
+            showBooks()
+          }
+    })
+        bookCard.classList.add('card')  
+        bookCard.textContent = bookContent.info()
+        btn2.classList.add('btn2')
+        btn2.textContent = 'X'
+        bookCard.appendChild(btn2)
+        books.appendChild(bookCard)
+}
+
 function showBooks(){
     clearDisplay()
     for(let i = 0; i <= myLibrary.length-1; i++){
         console.log((myLibrary[i]).info())
-        let book = document.createElement('div')
-        book.classList.add('card')
-        book.textContent = (myLibrary[i]).info()
-        bookGrid.appendChild(book)
+        myLibrary[i].data = i 
+        createCard((myLibrary[i]))
     }
 }
 
 
 function clearDisplay() {
-    bookGrid.textContent = ''
+    books.textContent = ''
 }
+
