@@ -5,8 +5,6 @@ const btn = document.getElementById('btn')
 const closebtn = document.getElementById('close')
 
 
-
-
 btn.addEventListener('click', function(){
     bookform.style.display = 'flex'
     books.style.display = 'none'
@@ -72,17 +70,31 @@ function createCard(bookContent) {
     let bookCard = document.createElement('div')
     console.log(`dhsjadhjshdsjd ${this}`)
     let btn2 = document.createElement('button')
+    let readBtn = document.createElement('button')
     btn2.addEventListener('click', function() {
-        if (bookContent.data > -1) { // only splice array when item is found
-            myLibrary.splice(bookContent.data, 1); // 2nd parameter means remove one item only
+        if (bookContent.data > -1) { 
+            myLibrary.splice(bookContent.data, 1); 
             showBooks()
           }
+    })
+    readBtn.addEventListener('click', function(){
+        if (bookContent.is_read === true){
+            bookContent.is_read = false
+            showBooks()
+        }
+        else {
+            bookContent.is_read = true
+            showBooks()
+        }
     })
         bookCard.classList.add('card')  
         bookCard.textContent = bookContent.info()
         btn2.classList.add('btn2')
         btn2.textContent = 'X'
+        readBtn.classList.add('readBtn')
+        readBtn.textContent = 'Change read status'
         bookCard.appendChild(btn2)
+        bookCard.appendChild(readBtn)
         books.appendChild(bookCard)
 }
 
